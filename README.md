@@ -2,7 +2,9 @@
 
 This build demonstrates how to have a project that has an open-core (public sources) and optional enterprise extensions (private sources).
 
-The key is that during Gradle configuration time we look up `enterprise-extensions` directory on disk
+## Setup
+
+During Gradle configuration time in the [app's build file](app/build.gradle.kts) we look up `enterprise-extensions` directory on disk
 and include its contents into the main source set, but only if it exists.
 If it does exist, then not only will it participate in the build executed via command line, 
 but also an IDE would pick it up and allow to use all IDE features transparently between open-source and enterprise sources.
@@ -11,8 +13,10 @@ The functionality of enterprise services is provided via the `ServiceLoader` mec
 meaning that is enough for the services to be present on runtime classpath.
 However, including enterprise extensions as sources instead of dependencies allow to avoid the need of publishing the artifacts of the open-core part.
 
-One of the pitfalls in this setup is the ability of open-source sources depend on enterprise sources.
+One of the pitfalls in this setup is the possibility of open-source sources depending on enterprise sources.
 In this case the project will successfully build when enterprise sources are present, but the build will fail when they are not provided.
+
+## Demo
 
 For demonstration purposes in this project the enterprise sources are in the `enterprise-extensions-not-here` directory,
 which means they will not participate in the build initially.
