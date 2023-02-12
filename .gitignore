@@ -5,3 +5,6 @@
 build
 
 .idea
+
+# Make sure enterprise source are not check in
+/enterprise-extensions
